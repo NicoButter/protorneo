@@ -5,5 +5,5 @@ app_name = 'torneos'
 
 urlpatterns = [
     path('crear/', views.crear_torneo, name='crear_torneo'),
-    #path('lista/', views.lista_torneos, name='lista_torneos'),
+    path('<int:torneo_id>/asignar_juez/', views.asignar_juez_a_prueba, name='asignar_juez'),
 ]
