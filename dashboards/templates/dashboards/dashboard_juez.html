@@ -1,0 +1,9 @@
+<!-- dashboard_juez.html -->
+<h1>Bienvenido al Dashboard del Juez</h1>
+<p>Estos son los torneos activos a los que estás asignado:</p>
+
+<ul>
+    {% for torneo in torneos_activos %}
+        <li><a href="{% url 'torneos:ver_torneo' torneo.id %}">{{ torneo.nombre }} - {{ torneo.fecha }}</a></li>
+    {% endfor %}
+</ul>

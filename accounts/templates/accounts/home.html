@@ -1,0 +1,20 @@
+<!-- accounts/templates/accounts/home.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<div class="landing-container">
+    <h1>Bienvenido a ProTorneo</h1>
+    <p>Gestiona tus torneos de gimnasia artística de manera sencilla.</p>
+    <div class="buttons">
+        <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Registrarse</a>
+    </div>
+    <div class="novedades">
+        <h2>Novedades</h2>
+        <ul>
+            <li>Nuevo torneo disponible para inscripción.</li>
+            <li>Actualización de resultados del último torneo.</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
