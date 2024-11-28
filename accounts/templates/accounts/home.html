@@ -1,20 +1,50 @@
-<!-- accounts/templates/accounts/home.html -->
-{% extends "base.html" %}
+{% load static %}
 
-{% block content %}
-<div class="landing-container">
-    <h1>Bienvenido a ProTorneo</h1>
-    <p>Gestiona tus torneos de gimnasia artística de manera sencilla.</p>
-    <div class="buttons">
-        <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
-        {% comment %} <a href="{% url 'register' %}" class="btn btn-secondary">Registrarse</a> {% endcomment %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Bienvenido a Hispano - ProTorneo</title>
+    
+    <link rel="stylesheet" href="{% static 'accounts/css/home_styles.css' %}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <img src="{% static 'accounts/images/hispano_logo.png' %}" alt="Logo del Club Hispano" class="landing-logo">
+            <h1>Bienvenido a Hispano - ProTorneo</h1>
+            <p class="intro-text">Gestiona tus torneos de gimnasia artística de manera sencilla.</p>
+        </header>
+
+        <div class="cta-buttons">
+            <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
+        </div>
+
+        <section class="novedades">
+            <h2 class="section-title">Novedades</h2>
+            <ul class="novedades-list">
+                <li>Nuevo torneo disponible para inscripción.</li>
+                <li>Actualización de resultados del último torneo.</li>
+                <li>Preparativos para el campeonato de gimnasia artística 2024.</li>
+            </ul>
+        </section>
+
+        <section class="media">
+            <h2 class="section-title">Galería</h2>
+            <div class="gallery">
+                <img src="{% static 'images/torneo1.jpg' %}" alt="Imagen del torneo 1">
+                <img src="{% static 'images/torneo2.jpg' %}" alt="Imagen del torneo 2">
+                <img src="{% static 'images/torneo3.jpg' %}" alt="Imagen del torneo 3">
+            </div>
+        </section>
     </div>
-    <div class="novedades">
-        <h2>Novedades</h2>
-        <ul>
-            <li>Nuevo torneo disponible para inscripción.</li>
-            <li>Actualización de resultados del último torneo.</li>
-        </ul>
-    </div>
-</div>
-{% endblock %}
+</body>
+</html>

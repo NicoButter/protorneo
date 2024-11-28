@@ -1,0 +1,107 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+.landing-container {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+}
+
+.landing-header {
+    background-color: #007bff;
+    color: white;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin-bottom: 40px;
+}
+
+.landing-logo {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.intro-text {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.cta-buttons .btn-primary {
+    padding: 12px 30px;
+    font-size: 1.2rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta-buttons .btn-primary:hover {
+    background-color: #218838;
+}
+
+.novedades {
+    margin-top: 60px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.novedades h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.novedades-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.novedades-list li {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.media {
+    margin-top: 50px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #007bff;
+    margin-bottom: 25px;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.gallery img {
+    width: 100%;
+    max-width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+}
