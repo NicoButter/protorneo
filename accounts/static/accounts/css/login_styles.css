@@ -1,3 +1,12 @@
+body {
+    margin: 0;
+    height: 100vh; /* Esto hace que el body ocupe toda la pantalla */
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    background-color: #f4f4f4; /* Puedes cambiar el color de fondo */
+}
+
 .login-container {
     background-color: #ffffff;
     color: #333;
