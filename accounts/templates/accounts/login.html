@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+  
+    <link rel="stylesheet" href="{% static 'css/login_styles.css' %}">
+
+<body>
+    <div class="login-container">
+        <h1>Iniciar Sesión</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-control">
+                <label for="id_username">Usuario</label>
+                <input type="text" name="username" id="id_username" required>
+            </div>
+            <div class="form-control">
+                <label for="id_password">Contraseña</label>
+                <input type="password" name="password" id="id_password" required>
+            </div>
+            <button type="submit" class="btn-login">Ingresar</button>
+        </form>
+        <div class="footer">
+            <p>¿Olvidaste tu contraseña? <a href="#">Recupérala aquí</a></p>
+            <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+        </div>
+    </div>
+</body>
+</html>

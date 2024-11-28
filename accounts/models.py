@@ -1,5 +1,7 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
+
+#--------------------------------------------------------------------------------------------------------------------------------------
 
 class Especialidad(models.Model):
     nombre = models.CharField(max_length=100)
@@ -19,10 +21,20 @@ class Usuario(AbstractUser):
     )
     
     rol = models.CharField(max_length=50, choices=ROL_CHOICES)
-    especialidad = models.ForeignKey(Especialidad, on_delete=models.SET_NULL, null=True, blank=True)
+    especialidad = models.ForeignKey('Especialidad', on_delete=models.SET_NULL, null=True, blank=True)
     foto = models.ImageField(upload_to='usuarios/', null=True, blank=True)
     
-    # Otros campos que consideres necesarios como teléfono, dirección, etc.
+    groups = models.ManyToManyField(
+        Group,
+        related_name="usuario_groups",  # Cambiar el nombre del related_name
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name="usuario_permissions",  # Cambiar el nombre del related_name
+        blank=True
+    )
+
     
     def __str__(self):
         return self.username
@@ -31,7 +43,7 @@ class Usuario(AbstractUser):
 
 class Legajo(models.Model):
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='legajos')
-    numero_legajo = models.CharField(max_length=50, unique=True)  # El número único de legajo
+    numero_legajo = models.CharField(max_length=50, unique=True, db_index=True)
     fecha_creacion = models.DateField()
     estado = models.CharField(max_length=20, choices=[('activo', 'Activo'), ('inactivo', 'Inactivo')])
     comentarios = models.TextField(blank=True, null=True)
