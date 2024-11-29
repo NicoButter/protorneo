@@ -24,9 +24,13 @@
             <p class="intro-text">Gestiona tus torneos de gimnasia artística de manera sencilla.</p>
         </header>
 
-        <div class="cta-buttons">
+        {% comment %} <div class="cta-buttons">
             <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
-        </div>
+        </div> {% endcomment %}
+
+        <form method="GET" action="{% url 'accounts:user_login' %}">
+            <button type="submit">Iniciar sesión</button>
+        </form>
 
         <section class="novedades">
             <h2 class="section-title">Novedades</h2>

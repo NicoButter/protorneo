@@ -6,19 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}ProTorneo{% endblock %}</title>
+
+    <script src="https://kit.fontawesome.com/16c678032e.js" crossorigin="anonymous"></script>
+
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <header>
         <nav>
             <div class="logo">
-                <a href="{% url 'home' %}">ProTorneo</a>
+                <a href="{% url 'accounts:home' %}">ProTorneo</a>
             </div>
             <ul class="menu">
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Cerrar Sesión</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                    <form id="logout-form" method="post" action="{% url 'accounts:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit" class="logout-button" title="Cerrar sesión">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 {% endif %}
             </ul>
         </nav>
@@ -30,7 +36,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 ProTorneo. Todos los derechos reservados.</p>
+        <p>&copy; 2024 ProTorneo - Hispano Americano. Todos los derechos reservados.</p>
     </footer>
 </body>
 </html>

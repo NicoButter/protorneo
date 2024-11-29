@@ -9,16 +9,42 @@
   
     <link rel="stylesheet" href="{% static 'accounts/css/home_styles.css' %}">
     <link rel="stylesheet" href="{% static 'accounts/css/login_styles.css' %}">
-    
 </head>
 <body>
     <div class="login-container">
         <h1>Iniciar Sesión</h1>
-        <form method="post">
+
+        <!-- Mostrar los mensajes de error generales -->
+        {% if messages %}
+            <div class="alert-messages">
+                {% for message in messages %}
+                    <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Formulario de inicio de sesión -->
+        <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}  <!-- Aquí estamos renderizando todo el formulario -->
-            <button type="submit" class="btn-login">Ingresar</button>
+            
+            <!-- Mostrar los campos del formulario -->
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }} {{ field }}
+                    <!-- Mostrar los errores de cada campo -->
+                    {% if field.errors %}
+                        <div class="error-message">
+                            {% for error in field.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit">Iniciar Sesión</button>
         </form>
+        
         <div class="footer">
             <p>¿Olvidaste tu contraseña? <a href="#">Recupérala aquí</a></p>
         </div>

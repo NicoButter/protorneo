@@ -7,35 +7,35 @@
   
   <div class="dashboard-section">
     <h2>Torneos</h2>
-    <ul>
+    {% comment %} <ul>
       {% for torneo in torneos %}
         <li>{{ torneo.nombre }} - {{ torneo.fecha }} - {{ torneo.lugar }}</li>
       {% empty %}
         <li>No hay torneos creados aún.</li>
       {% endfor %}
     </ul>
-    <a href="{% url 'crear_torneo' %}">Crear nuevo Torneo</a>
+    <a href="{% url 'crear_torneo' %}">Crear nuevo Torneo</a> {% endcomment %}
   </div>
 
   <div class="dashboard-section">
     <h2>Pruebas</h2>
-    <ul>
+    {% comment %} <ul>
       {% for prueba in pruebas %}
         <li>{{ prueba.nombre }} - {{ prueba.torneo.nombre }}</li>
       {% empty %}
         <li>No hay pruebas asignadas.</li>
       {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
   </div>
 
   <div class="dashboard-section">
     <h2>Asignaciones de Jueces</h2>
-    <ul>
+    {% comment %} <ul>
       {% for asignacion in asignaciones %}
         <li>{{ asignacion.juez.username }} - {{ asignacion.prueba.nombre }}</li>
       {% empty %}
         <li>No hay asignaciones de jueces.</li>
       {% endfor %}
-    </ul>
+    </ul> {% endcomment %}
   </div>
 {% endblock %}

@@ -21,5 +21,6 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('accounts.urls')),  # La landing está en 'accounts'
+    path('accounts/', include('accounts.urls')),  # Esto incluye las URLs de la app 'accounts'
     path('dashboard/', include('dashboards.urls')), 
 ]

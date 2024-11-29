@@ -1,10 +1,12 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Usuario, Especialidad
 from .forms import UsuarioChangeForm
 from django.contrib.auth.admin import UserAdmin
+from django.contrib import admin
+from .models import Especialidad, Usuario, Legajo, Telefono, Direccion, Correo
 
 
+# Formulario para la creación de usuarios
 class UsuarioForm(UserCreationForm):
     # Define los campos que se desean mostrar en el formulario de creación
     rol = forms.ChoiceField(choices=Usuario.ROL_CHOICES, required=True)
@@ -15,9 +17,7 @@ class UsuarioForm(UserCreationForm):
         model = Usuario
         fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'rol', 'especialidad', 'foto')
 
-# Administrador de Especialidad
-from django.contrib import admin
-from .models import Especialidad, Usuario, Legajo, Telefono, Direccion, Correo
+
 
 @admin.register(Especialidad)
 class EspecialidadAdmin(admin.ModelAdmin):
@@ -61,7 +61,7 @@ class UsuarioAdmin(UserAdmin):
             'fields': ('username', 'first_name', 'last_name', 'email', 'rol', 'especialidad', 'foto', 'is_active')
         }),
         ('Contraseña', {
-            'fields': ('password',),  # No lo mostramos directamente, pero Django lo maneja internamente
+            'fields': ('password',),  # La contraseña no se edita directamente
         }),
     )
 

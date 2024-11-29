@@ -1,4 +1,3 @@
-# urls.py en la app 'dashboards'
 from django.urls import path
 from . import views
 
