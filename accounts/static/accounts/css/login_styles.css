@@ -1,10 +1,12 @@
 body {
     margin: 0;
-    height: 100vh; /* Esto hace que el body ocupe toda la pantalla */
+    height: 100vh;
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    background-color: #f4f4f4; /* Puedes cambiar el color de fondo */
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+    font-style: normal;    background-color: #f4f4f4;
+    color: #333;
 }
 
 .login-container {
@@ -24,30 +26,52 @@ body {
     color: #1e3c72;
 }
 
-.login-container form {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-control {
+.form-group {
     margin-bottom: 15px;
+    text-align: left;
 }
 
-.form-control label {
+.form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #333;
 }
 
-.form-control input {
+.form-group input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
 }
 
-.btn-login {
+.form-group input:focus {
+    border-color: #1e3c72;
+}
+
+.error-message p {
+    color: #d9534f;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.alert-messages {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    border-radius: 4px;
+}
+
+.alert-messages p {
+    margin: 0;
+}
+
+button[type="submit"] {
     background-color: #1e3c72;
     color: #fff;
     padding: 10px 15px;
@@ -56,15 +80,18 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
 }
 
-.btn-login:hover {
+button[type="submit"]:hover {
     background-color: #163b61;
 }
 
 .footer {
-    margin-top: 15px;
+    margin-top: 20px;
     font-size: 14px;
+    color: #666;
 }
 
 .footer a {

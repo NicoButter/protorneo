@@ -1,0 +1,150 @@
+/* Estilos generales */
+body {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #343a40;  /* Gris oscuro */
+    color: white;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .logo a {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav .menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+header nav .menu li {
+    display: inline;
+}
+
+header nav .menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+header nav .menu li a:hover {
+    color: #007bff;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    padding: 2rem 3rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+/* Botones */
+.buttons a {
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    margin: 1rem 0.5rem;
+    display: inline-block;
+    border-radius: 5px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Ajustes de diseño y espaciado */
+.landing-container {
+    text-align: center;
+    margin: 2rem auto;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    color: #007bff;
+}
+
+/* Media Queries para hacer el diseño más responsivo */
+@media (max-width: 768px) {
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav .menu {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    main {
+        padding: 1rem;
+        margin: 1rem;
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    footer {
+        font-size: 0.8rem;
+    }
+}

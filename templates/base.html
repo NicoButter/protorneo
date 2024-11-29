@@ -8,8 +8,16 @@
     <title>{% block title %}ProTorneo{% endblock %}</title>
 
     <script src="https://kit.fontawesome.com/16c678032e.js" crossorigin="anonymous"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'base/css/base_styles.css' %}">
 
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block extra_css %}
+    {% endblock %}
+
 </head>
 <body>
     <header>

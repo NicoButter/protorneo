@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'dashboards/css/jefe_dashboard_styles.css' %}">
+{% endblock %}
+
 {% block content %}
   <h1>Bienvenido al Dashboard - Jefe de Torneos.</h1>
   
@@ -38,4 +42,5 @@
       {% endfor %}
     </ul> {% endcomment %}
   </div>
+  
 {% endblock %}
