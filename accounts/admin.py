@@ -1,40 +1,110 @@
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from .models import Usuario, Especialidad
+from .forms import UsuarioChangeForm
+from django.contrib.auth.admin import UserAdmin
+
+
+class UsuarioForm(UserCreationForm):
+    # Define los campos que se desean mostrar en el formulario de creación
+    rol = forms.ChoiceField(choices=Usuario.ROL_CHOICES, required=True)
+    especialidad = forms.ModelChoiceField(queryset=Especialidad.objects.all(), required=False)
+    foto = forms.ImageField(required=False)
+
+    class Meta:
+        model = Usuario
+        fields = ('username', 'password1', 'password2', 'email', 'first_name', 'last_name', 'rol', 'especialidad', 'foto')
+
+# Administrador de Especialidad
 from django.contrib import admin
 from .models import Especialidad, Usuario, Legajo, Telefono, Direccion, Correo
 
-# Registro del modelo Especialidad
 @admin.register(Especialidad)
 class EspecialidadAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'descripcion')  # Campos que se mostrarán en la lista de objetos
-    search_fields = ('nombre',)  # Habilitar búsqueda por nombre
+    list_display = ('nombre', 'descripcion')
+    search_fields = ('nombre',)
 
-# Registro del modelo Usuario
+# Inline para Legajo
+class LegajoInline(admin.TabularInline):
+    model = Legajo
+    extra = 1  # Formularios vacíos adicionales para agregar legajos
+
+# Inline para Teléfono
+class TelefonoInline(admin.TabularInline):
+    model = Telefono
+    extra = 1  # Formularios vacíos adicionales para agregar teléfonos
+
+# Inline para Dirección
+class DireccionInline(admin.TabularInline):
+    model = Direccion
+    extra = 1  # Formularios vacíos adicionales para agregar direcciones
+
+# Inline para Correo
+class CorreoInline(admin.TabularInline):
+    model = Correo
+    extra = 1  # Formularios vacíos adicionales para agregar correos
+
+# Administrador de Usuario
 @admin.register(Usuario)
-class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('username', 'rol', 'especialidad', 'foto')  # Campos que se mostrarán en la lista de objetos
-    list_filter = ('rol', 'especialidad')  # Filtros disponibles en el admin
-    search_fields = ('username', 'email')  # Habilitar búsqueda por nombre de usuario y correo
+class UsuarioAdmin(UserAdmin):
+    form = UsuarioChangeForm  # Usar el formulario de edición personalizado
+    add_form = UsuarioForm  # Usar el formulario de creación personalizado
 
-# Registro del modelo Legajo
+    # Campos que aparecerán en el administrador
+    list_display = ('username', 'email', 'first_name', 'last_name', 'rol', 'especialidad', 'foto', 'is_active')
+    list_filter = ('rol', 'especialidad', 'is_active')
+    search_fields = ('username', 'email', 'first_name', 'last_name')
+
+    # Configuración de campos visibles al editar el usuario
+    fieldsets = (
+        (None, {
+            'fields': ('username', 'first_name', 'last_name', 'email', 'rol', 'especialidad', 'foto', 'is_active')
+        }),
+        ('Contraseña', {
+            'fields': ('password',),  # No lo mostramos directamente, pero Django lo maneja internamente
+        }),
+    )
+
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'rol', 'especialidad', 'foto'),
+        }),
+    )
+
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if obj:  # Si estamos editando un usuario existente
+            # Cuando estamos editando un usuario, la contraseña no se muestra como campo editable,
+            # sino que Django muestra un enlace para cambiarla.
+            fieldsets = list(fieldsets)
+            fieldsets[0][1]['fields'] = ('username', 'email', 'first_name', 'last_name', 'rol', 'especialidad', 'foto', 'is_active')
+            fieldsets.append(('Contraseña', {
+                'fields': ('password',),
+            }))
+        return fieldsets
+
+# Administrador de Legajo
 @admin.register(Legajo)
 class LegajoAdmin(admin.ModelAdmin):
-    list_display = ('numero_legajo', 'usuario', 'fecha_creacion', 'estado', 'archivo')  # Campos que se mostrarán
-    list_filter = ('estado', 'fecha_creacion')  # Filtros disponibles
-    search_fields = ('numero_legajo',)  # Habilitar búsqueda por número de legajo
+    list_display = ('numero_legajo', 'usuario', 'fecha_creacion', 'estado', 'archivo')
+    list_filter = ('estado', 'fecha_creacion')
+    search_fields = ('numero_legajo',)
 
-# Registro del modelo Telefono
+# Administrador de Teléfono
 @admin.register(Telefono)
 class TelefonoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'tipo', 'numero')  # Campos que se mostrarán
-    search_fields = ('numero',)  # Habilitar búsqueda por número de teléfono
+    list_display = ('usuario', 'tipo', 'numero')
+    search_fields = ('numero',)
 
-# Registro del modelo Direccion
+# Administrador de Dirección
 @admin.register(Direccion)
 class DireccionAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'tipo', 'direccion', 'ciudad', 'estado', 'codigo_postal')  # Campos que se mostrarán
-    search_fields = ('direccion', 'ciudad', 'estado')  # Habilitar búsqueda por dirección, ciudad y estado
+    list_display = ('usuario', 'tipo', 'direccion', 'ciudad', 'estado', 'codigo_postal')
+    search_fields = ('direccion', 'ciudad', 'estado')
 
-# Registro del modelo Correo
+# Administrador de Correo
 @admin.register(Correo)
 class CorreoAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'tipo', 'correo')  # Campos que se mostrarán
-    search_fields = ('correo',)  # Habilitar búsqueda por correo electrónico
+    list_display = ('usuario', 'tipo', 'correo')
+    search_fields = ('correo',)

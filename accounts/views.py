@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponse
+from .forms import UsuarioLoginForm
+from django.contrib import messages
+
+
 
 def home(request):
     return render(request, 'accounts/home.html')
@@ -9,22 +13,22 @@ def home(request):
 
 def user_login(request):
     if request.method == 'POST':
-        # Obtener los datos del formulario
-        username = request.POST['username']
-        password = request.POST['password']
+        form = UsuarioLoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
 
-        # Autenticar al usuario
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            # Si el usuario es autenticado correctamente, loguearlo
-            login(request, user)
-            # Redirigir a la página de inicio o a la página de destino
-            return redirect('home')  # Reemplaza 'home' con el nombre de la vista que desees
-        else:
-            # Si las credenciales no son correctas, mostrar un mensaje de error
-            return render(request, 'accounts/login.html', {'error': 'Credenciales incorrectas'})
-
+            if user is not None:
+                login(request, user)
+                # Redirigir según el rol del usuario
+                if user.rol == 'jefe_torneo':  # Cambia esto según el valor del rol de juez
+                    return redirect('dashboard_jefe_torneo')  # Nombre de la URL para el dashboard del juez
+                else:
+                    return redirect('default_dashboard')  # Redirigir a otro dashboard o página
+            else:
+                messages.error(request, 'Credenciales inválidas')
     else:
-        # Si el método es GET, simplemente mostrar el formulario de login
-        return render(request, 'accounts/login.html')
+        form = UsuarioLoginForm()
+
+    return render(request, 'accounts/login.html', {'form': form})

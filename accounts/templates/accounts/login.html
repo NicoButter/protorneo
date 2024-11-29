@@ -9,20 +9,14 @@
   
     <link rel="stylesheet" href="{% static 'accounts/css/home_styles.css' %}">
     <link rel="stylesheet" href="{% static 'accounts/css/login_styles.css' %}">
-
+    
+</head>
 <body>
     <div class="login-container">
         <h1>Iniciar Sesión</h1>
         <form method="post">
             {% csrf_token %}
-            <div class="form-control">
-                <label for="id_username">Usuario</label>
-                <input type="text" name="username" id="id_username" required>
-            </div>
-            <div class="form-control">
-                <label for="id_password">Contraseña</label>
-                <input type="password" name="password" id="id_password" required>
-            </div>
+            {{ form.as_p }}  <!-- Aquí estamos renderizando todo el formulario -->
             <button type="submit" class="btn-login">Ingresar</button>
         </form>
         <div class="footer">

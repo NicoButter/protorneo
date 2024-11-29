@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+  <h1>Bienvenido al Dashboard - Jefe de Torneos.</h1>
+  
+  <div class="dashboard-section">
+    <h2>Torneos</h2>
+    <ul>
+      {% for torneo in torneos %}
+        <li>{{ torneo.nombre }} - {{ torneo.fecha }} - {{ torneo.lugar }}</li>
+      {% empty %}
+        <li>No hay torneos creados aún.</li>
+      {% endfor %}
+    </ul>
+    <a href="{% url 'crear_torneo' %}">Crear nuevo Torneo</a>
+  </div>
+
+  <div class="dashboard-section">
+    <h2>Pruebas</h2>
+    <ul>
+      {% for prueba in pruebas %}
+        <li>{{ prueba.nombre }} - {{ prueba.torneo.nombre }}</li>
+      {% empty %}
+        <li>No hay pruebas asignadas.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="dashboard-section">
+    <h2>Asignaciones de Jueces</h2>
+    <ul>
+      {% for asignacion in asignaciones %}
+        <li>{{ asignacion.juez.username }} - {{ asignacion.prueba.nombre }}</li>
+      {% empty %}
+        <li>No hay asignaciones de jueces.</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
