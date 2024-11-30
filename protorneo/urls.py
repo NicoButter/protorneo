@@ -22,5 +22,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include('accounts.urls')),  # La landing está en 'accounts'
     path('accounts/', include('accounts.urls')),  # Esto incluye las URLs de la app 'accounts'
-    path('dashboard/', include('dashboards.urls')), 
+    path('dashboard/', include('dashboards.urls')),
+    path('pruebas/', include('pruebas.urls')),
+    path('torneos/', include('torneos.urls'))
 ]

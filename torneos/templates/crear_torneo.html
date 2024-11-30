@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'torneos/css/crear_torneo_styles.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>Crear Torneo</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Crear Torneo</button>
+</form>
+
+{% endblock %}

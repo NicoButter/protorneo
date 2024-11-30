@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Pruebas Disponibles</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Nivel de Dificultad</th>
+            <th>Duración Máxima</th>
+            <th>Puntaje Base</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prueba in pruebas %}
+        <tr>
+            <td>{{ prueba.nombre }}</td>
+            <td>{{ prueba.get_nivel_dificultad_display }}</td>
+            <td>{{ prueba.duracion_maxima }} segundos</td>
+            <td>{{ prueba.puntaje_base }}</td>
+            <td>
+                {% comment %} <a href="{% url 'pruebas:asignar_prueba' prueba.id %}">Asignar a Torneo</a> {% endcomment %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
