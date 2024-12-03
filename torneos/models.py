@@ -3,7 +3,6 @@ from pruebas.models import Prueba
 from accounts.models import Usuario  # Asumimos que el jefe de torneo es un tipo de usuario
 from django.utils import timezone
 
-
 #-------------------------------------------------------------------------------------------------------------------------------------
 
 class Torneo(models.Model):
@@ -49,3 +48,4 @@ class AsignacionJuez(models.Model):
     
     def __str__(self):
         return f"{self.juez} asignado a {self.prueba} en {self.torneo}"
+        
